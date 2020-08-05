@@ -4,13 +4,34 @@ import items from "../data";
 
 export const RoomContext = createContext();
 
+const Test = () => {
+  const { type, capacity, handleChange } = React.useContext(RoomContext);
+
+  console.log(type, capacity);
+
+  return (
+      <div>
+        <select name="type" onChange={handleChange}>
+            <option value="all">all</option>
+            <option value="another">another</option>
+            <option value="one">one</option>
+        </select>
+        <select name="capacity" onChange={handleChange}>
+          <option value="1">1</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+  )
+};
+
 const RoomProvider = (props) => {
   const [rooms, setRooms] = useState([]);
   const [sortedRooms, setSortedRooms] = useState([]);
   const [featuredRooms, setFeaturedRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState("all");
-  const [capacity, setCapacity] = useState(1);
+  const [capacity, setCapacity] = useState('1');
   const [price, setPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -128,6 +149,7 @@ const RoomProvider = (props) => {
         filteredRooms,
       }}
     >
+      <Test />
       {props.children}
     </RoomContext.Provider>
   );
